@@ -1,0 +1,74 @@
+baseURL = "https://rodillianrunners.co.uk/"
+languageCode = "en-gb"
+title = "Rodillian Runners"
+theme = "rodillian"
+
+[params]
+  description = "Small, friendly running club based in Stanley, Wakefield. Training most Tuesdays at 7pm."
+  clubLocation = "Stanley Rodillians RUFC, Lee Moor Road, Stanley, WF3 4EF"
+
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Why Rodillian Runners"
+    url = "/why-rodillian-runners/"
+    weight = 2
+  [[menu.main]]
+    name = "Contact Us"
+    url = "/contact/"
+    weight = 3
+  [[menu.main]]
+    name = "Photos"
+    url = "/photos/"
+    weight = 4
+  [[menu.main]]
+    name = "Club Records"
+    url = "/club-records/"
+    weight = 5
+  [[menu.main]]
+    name = "Club Activities"
+    url = "/club-activities/"
+    weight = 6
+    identifier = "activities"
+  [[menu.main]]
+    name = "Membership"
+    url = "/membership/"
+    weight = 7
+
+  [[menu.footer]]
+    name = "Facebook"
+    url = "https://www.facebook.com/RodillianRunners"
+    weight = 1
+  [[menu.footer]]
+    name = "Instagram"
+    url = "https://www.instagram.com/rodillianrunners/"
+    weight = 2
+  [[menu.footer]]
+    name = "Strava"
+    url = "https://www.strava.com/clubs/rodillian-runners"
+    weight = 3
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[build]
+  [build.buildStats]
+    enable = false
+
+# Pre-build hooks: run scripts before hugo builds. Fetch the live ICS feed so
+# the calendar widget has same-origin data (no CORS issues at runtime).
+[hooks]
+  [hooks.pre]
+    [[hooks.pre.commands]]
+      command = "bash scripts/fetch-calendar.sh"
+      weighting = -10
+      outputs = ["themes/rodillian/static/calendar.ics"]

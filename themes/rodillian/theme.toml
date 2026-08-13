@@ -1,0 +1,8 @@
+name = "rodillian"
+license = "MIT"
+description = "Custom theme for Rodillian Runners"
+homepage = "https://rodillianrunners.co.uk/"
+min_version = "0.145.0"
+
+[author]
+  name = "Edd Almond"

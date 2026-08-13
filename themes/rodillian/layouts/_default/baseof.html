@@ -1,0 +1,77 @@
+{{- /*
+  Rodillian Runners — Base Template
+  - Mobile-first
+  - WordPress Blocksy-feel: clean header, narrow content column, sans-serif body
+*/ -}}
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} — {{ .Site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <link rel="icon" type="image/jpeg" href="/images/rods-logo.jpeg">
+  <link rel="canonical" href="{{ .Permalink }}">
+  <meta property="og:title" content="{{ .Title }}">
+  <meta property="og:description" content="{{ .Site.Params.description }}">
+  <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:image" content="{{ .Site.BaseURL }}images/banner.jpeg">
+  <meta name="theme-color" content="#1f4e79">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="site-brand">
+        <img src="/images/rods-logo.jpeg" alt="Rodillian Runners" class="site-logo">
+        <span class="site-title">Rodillian Runners</span>
+      </a>
+      <nav class="primary-nav" aria-label="Primary">
+        <button class="nav-toggle" aria-expanded="false" aria-controls="primary-menu">
+          <span class="sr-only">Menu</span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+        <ul id="primary-menu" class="nav-list">
+          {{ range .Site.Menus.main }}
+            <li{{ if .HasChildren }} class="has-children"{{ end }}>
+              <a href="{{ .URL }}"{{ if eq .URL "/" }} aria-current="page"{{ end }}>{{ .Name }}</a>
+              {{ if .HasChildren }}
+                <ul class="sub-menu">
+                  {{ range .Children }}
+                    <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+                  {{ end }}
+                </ul>
+              {{ end }}
+            </li>
+          {{ end }}
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="site-main">
+    <div class="container">
+      {{ block "main" . }}{{ end }}
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; {{ now.Format "2006" }} Rodillian Runners. Small, friendly running club based in Stanley, Wakefield.</p>
+      <ul class="social-links">
+        {{ range .Site.Menus.footer }}
+          <li><a href="{{ .URL }}" target="_blank" rel="noopener noreferrer">{{ .Name }}</a></li>
+        {{ end }}
+      </ul>
+    </div>
+  </footer>
+
+  <script src="/js/nav.js" defer></script>
+  {{ block "scripts" . }}{{ end }}
+</body>
+</html>

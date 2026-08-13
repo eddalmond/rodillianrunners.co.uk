@@ -1,0 +1,340 @@
+/* Rodillian Runners — main stylesheet
+   Clean, fast, mobile-first. Inspired by Blocksy 2.x but minimal. */
+
+:root {
+  --brand: #1f4e79;
+  --brand-light: #2d6cab;
+  --text: #1f2937;
+  --text-muted: #4b5563;
+  --bg: #ffffff;
+  --bg-alt: #f9fafb;
+  --border: #e5e7eb;
+  --radius: 6px;
+  --max-width: 880px;
+  --header-height: 80px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  background: var(--brand);
+  color: white;
+  padding: 0.75rem 1.25rem;
+  z-index: 1000;
+  text-decoration: none;
+}
+.skip-link:focus { top: 0; }
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --- Header --- */
+.site-header {
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--header-height);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.site-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--text);
+}
+.site-logo { height: 50px; width: auto; }
+.site-title {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+/* --- Primary nav --- */
+.primary-nav { display: flex; align-items: center; }
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: 0.5rem;
+  flex-direction: column;
+  gap: 4px;
+}
+.nav-toggle-bar {
+  width: 24px;
+  height: 3px;
+  background: var(--text);
+  border-radius: 2px;
+}
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+.nav-list a {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  padding: 0.25rem 0;
+}
+.nav-list a:hover { color: var(--brand); }
+.nav-list .has-children { position: relative; }
+.nav-list .sub-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.5rem 0;
+  list-style: none;
+  margin: 0;
+  min-width: 200px;
+  display: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.nav-list .has-children:hover .sub-menu,
+.nav-list .has-children:focus-within .sub-menu { display: block; }
+.nav-list .sub-menu a {
+  text-transform: none;
+  display: block;
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 720px) {
+  .nav-toggle { display: flex; }
+  .nav-list {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    gap: 0;
+    padding: 1rem 0;
+    border-top: 1px solid var(--border);
+  }
+  .nav-list.open { display: flex; }
+  .nav-list a { padding: 0.5rem 0; }
+  .nav-list .sub-menu {
+    position: static;
+    border: 0;
+    box-shadow: none;
+    padding-left: 1rem;
+  }
+  .nav-list .has-children:hover .sub-menu,
+  .nav-list .has-children:focus-within .sub-menu { display: block; }
+}
+
+/* --- Main content --- */
+.site-main { min-height: 60vh; padding: 2rem 0 4rem; }
+.page-header { margin-bottom: 2rem; }
+.page-header h1 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  margin: 0;
+  color: var(--brand);
+}
+.page-content h2 { margin-top: 2.5rem; color: var(--brand); }
+.page-content p { margin: 1rem 0; }
+.page-content a { color: var(--brand); }
+.page-content img { max-width: 100%; height: auto; border-radius: var(--radius); }
+.page-content .has-text-align-center { text-align: center; }
+.page-content .aligncenter { display: block; margin: 1.5rem auto; }
+
+/* --- Tables (Club Records etc) --- */
+.records-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  display: block;
+}
+.records-table table { width: 100%; border-collapse: collapse; }
+.records-table th, .records-table td {
+  border: 1px solid var(--border);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+.records-table th {
+  background: var(--bg-alt);
+  font-weight: 600;
+}
+.records-table td.time { color: var(--brand); font-weight: 500; }
+.records-table td.date { color: var(--text-muted); font-size: 0.85rem; }
+.records-table th.distance { background: var(--bg-alt); vertical-align: middle; }
+
+/* --- Calendar --- */
+.calendar-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: var(--bg-alt);
+  border-radius: var(--radius);
+}
+.calendar-nav h2 { margin: 0; font-size: 1.25rem; color: var(--brand); }
+.calendar-nav button {
+  background: var(--brand);
+  color: white;
+  border: 0;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 1rem;
+}
+.calendar-nav button:hover { background: var(--brand-light); }
+.calendar-nav button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+.calendar-events { list-style: none; padding: 0; margin: 0; }
+.calendar-event {
+  border-left: 3px solid var(--brand);
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.75rem;
+  background: var(--bg-alt);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.calendar-event h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.1rem;
+  color: var(--text);
+}
+.calendar-event .event-when {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0.25rem 0;
+}
+.calendar-event .event-where {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0.25rem 0;
+}
+.calendar-event .event-desc {
+  margin-top: 0.5rem;
+}
+.calendar-event.cancelled { opacity: 0.5; }
+.calendar-event.cancelled h3 { text-decoration: line-through; }
+.calendar-empty {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-muted);
+  background: var(--bg-alt);
+  border-radius: var(--radius);
+}
+.calendar-loading {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-muted);
+}
+
+/* --- Forms --- */
+.contact-form { max-width: 560px; }
+.contact-form .form-row { margin-bottom: 1.25rem; }
+.contact-form label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+}
+.contact-form input,
+.contact-form textarea,
+.contact-form select {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 1rem;
+}
+.contact-form input:focus,
+.contact-form textarea:focus,
+.contact-form select:focus {
+  outline: 2px solid var(--brand);
+  outline-offset: 1px;
+}
+.contact-form textarea { min-height: 120px; resize: vertical; }
+.contact-form button {
+  background: var(--brand);
+  color: white;
+  border: 0;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.contact-form button:hover { background: var(--brand-light); }
+.contact-form .required { color: #c33; }
+
+/* --- Useful links / banner --- */
+.site-banner {
+  width: 100%;
+  height: auto;
+  margin: 1.5rem 0;
+  border-radius: var(--radius);
+}
+
+/* --- Footer --- */
+.site-footer {
+  border-top: 1px solid var(--border);
+  background: var(--bg-alt);
+  padding: 2rem 0;
+  margin-top: 4rem;
+  text-align: center;
+}
+.site-footer p { margin: 0 0 0.75rem; color: var(--text-muted); }
+.social-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.social-links a {
+  color: var(--brand);
+  text-decoration: none;
+}
+.social-links a:hover { text-decoration: underline; }

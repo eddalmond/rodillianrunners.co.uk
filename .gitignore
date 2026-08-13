@@ -1,0 +1,28 @@
+# Hugo build output
+public/
+.hugo_build.lock
+resources/_gen/
+
+# Local config overrides (if any)
+*.local.toml
+
+# Node / npm
+node_modules/
+package-lock.json
+
+# Editor / OS noise
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*~
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.local
+
+# Local-trash recovery (do not commit)
+.local-trash/

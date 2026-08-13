@@ -1,0 +1,47 @@
+{{/*
+  records-table.html
+  Renders a TablePress-style records table.
+  Input: a record object with:
+    - .header: array of column headers
+    - .rows: array of rows (first 3 = distance 1, next 3 = distance 2, etc.)
+  Format: each distance takes 3 rows:
+    - row 1: distance name (col 0) + athlete names
+    - row 2: empty (col 0) + times
+    - row 3: empty (col 0) + dates
+*/}}
+<div class="records-table">
+  <table>
+    <thead>
+      <tr>
+        {{ range .header }}
+          <th scope="col">{{ . }}</th>
+        {{ end }}
+      </tr>
+    </thead>
+    <tbody>
+      {{ $rows := .rows }}
+      {{ $numRecords := div (len $rows) 3 }}
+      {{ range $i := (seq 0 (sub $numRecords 1)) }}
+        {{ $nameRow := index $rows (mul $i 3) }}
+        {{ $timeRow := index $rows (add 1 (mul $i 3)) }}
+        {{ $dateRow := index $rows (add 2 (mul $i 3)) }}
+        <tr>
+          <th scope="rowgroup" rowspan="3" class="distance">{{ index $nameRow 0 }}</th>
+          {{ range $j, $name := $nameRow }}
+            {{ if gt $j 0 }}<td><strong>{{ $name }}</strong></td>{{ end }}
+          {{ end }}
+        </tr>
+        <tr>
+          {{ range $j, $time := $timeRow }}
+            {{ if gt $j 0 }}<td class="time">{{ $time }}</td>{{ end }}
+          {{ end }}
+        </tr>
+        <tr>
+          {{ range $j, $date := $dateRow }}
+            {{ if gt $j 0 }}<td class="date">{{ $date }}</td>{{ end }}
+          {{ end }}
+        </tr>
+      {{ end }}
+    </tbody>
+  </table>
+</div>

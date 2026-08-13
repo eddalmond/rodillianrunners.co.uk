@@ -1,0 +1,19 @@
+{{ define "main" }}
+<section class="page">
+  <header class="page-header">
+    <h1>{{ .Title }}</h1>
+  </header>
+  <div class="page-content">
+    {{ .Content }}
+
+    {{ $male := .Site.Data.records.male }}
+    {{ $female := .Site.Data.records.female }}
+
+    <h2>{{ $female.title }}</h2>
+    {{ partial "records-table.html" $female }}
+
+    <h2>{{ $male.title }}</h2>
+    {{ partial "records-table.html" $male }}
+  </div>
+</section>
+{{ end }}
