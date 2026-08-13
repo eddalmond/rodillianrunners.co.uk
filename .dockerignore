@@ -1,0 +1,21 @@
+# Hugo build output — built fresh inside the image
+public/
+.hugo_build.lock
+resources/
+
+# Local config overrides
+*.local.toml
+
+# Editor / OS noise
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*~
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.local

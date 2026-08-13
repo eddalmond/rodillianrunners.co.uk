@@ -37,6 +37,10 @@ theme = "rodillian"
     name = "Membership"
     url = "/membership/"
     weight = 7
+  [[menu.main]]
+    name = "Documents"
+    url = "/documents/"
+    weight = 8
 
   [[menu.footer]]
     name = "Facebook"
