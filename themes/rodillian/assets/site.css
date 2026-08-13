@@ -144,6 +144,12 @@ body {
   background: var(--red);
   color: var(--text);
 }
+.nav-list .has-children > a::after {
+  content: " ▾";
+  font-size: 0.7rem;
+  opacity: 0.7;
+  margin-left: 0.25rem;
+}
 .nav-list .sub-menu {
   position: absolute;
   top: 100%;
@@ -157,6 +163,7 @@ body {
   min-width: 200px;
   display: none;
   z-index: 20;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
 }
 .nav-list .has-children:hover .sub-menu,
 .nav-list .has-children:focus-within .sub-menu { display: block; }
@@ -190,6 +197,7 @@ body {
     padding-left: 1rem;
     width: 100%;
   }
+  .nav-list .has-children > a::after { content: ""; }
 }
 
 @media (max-width: 600px) {
@@ -218,6 +226,49 @@ body {
 }
 .page-content h3 {
   color: var(--text);
+}
+
+/* Activity cards — prominent links on the Club Activities page */
+.activity-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+.activity-card {
+  display: block;
+  padding: 1.25rem 1.5rem;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--red);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.activity-card:hover {
+  border-color: var(--green);
+  border-left-color: var(--green);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+.activity-card h3 {
+  margin: 0 0 0.5rem;
+  color: var(--green);
+  font-size: 1.2rem;
+}
+.activity-card p {
+  margin: 0 0 0.75rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+.activity-card-cta {
+  color: var(--red);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.activity-card:hover .activity-card-cta {
+  color: var(--green);
 }
 .page-content p,
 .home p { margin: 1rem 0; }

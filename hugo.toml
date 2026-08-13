@@ -33,6 +33,16 @@ theme = "rodillian"
     url = "/club-activities/"
     weight = 6
     identifier = "activities"
+    [[menu.main]]
+      parent = "activities"
+      name = "Distance League"
+      url = "/club-activities/distance-league/"
+      weight = 1
+    [[menu.main]]
+      parent = "activities"
+      name = "Championship"
+      url = "/club-activities/championship/"
+      weight = 2
   [[menu.main]]
     name = "Membership"
     url = "/membership/"
