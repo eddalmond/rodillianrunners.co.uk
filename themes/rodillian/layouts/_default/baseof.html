@@ -18,7 +18,21 @@
   <meta property="og:url" content="{{ .Permalink }}">
   <meta property="og:image" content="{{ .Site.BaseURL }}images/banner.jpeg">
   <meta name="theme-color" content="#000000">
-  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="{{ "/css/site.css" | relURL }}">
+  <script>
+    // Force fresh stylesheet on deploys older than this build
+    (function() {
+      var b = new Date().toISOString().slice(0,10);
+      try {
+        var sheets = document.querySelectorAll('link[rel="stylesheet"]');
+        sheets.forEach(function(s) {
+          if (s.href.indexOf('site.css') > -1) {
+            s.href = s.href.split('?')[0] + '?v=' + b;
+          }
+        });
+      } catch(e) {}
+    })();
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
