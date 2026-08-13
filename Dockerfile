@@ -21,12 +21,8 @@ COPY themes/ /src/themes/
 COPY hugo.toml /src/
 COPY content/ /src/content/
 COPY data/ /src/data/
-COPY layouts/ /src/layouts/
-COPY static/ /src/static/
-COPY assets/ /src/assets/
-COPY i18n/ /src/i18n/
-COPY archetypes/ /src/archetypes/
 COPY scripts/ /src/scripts/
+# Note: static/ assets are inside the theme (themes/rodillian/static/)
 
 # Pre-fetch the Google Calendar ICS feed (avoids CORS at runtime)
 RUN bash scripts/fetch-calendar.sh
