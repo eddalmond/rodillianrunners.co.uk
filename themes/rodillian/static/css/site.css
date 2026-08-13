@@ -220,9 +220,28 @@ body {
 }
 .page-content a:hover,
 .home a:hover { color: var(--green); }
-.page-content img { max-width: 100%; height: auto; border-radius: var(--radius); }
+.page-content img,
+.home img,
+img.content-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  display: block;
+  margin: 1.5rem auto;
+}
 .page-content .has-text-align-center { text-align: center; }
 .page-content .aligncenter { display: block; margin: 1.5rem auto; }
+
+/* Responsive iframe (Maps etc) — keep 4:3 aspect, scale to container */
+iframe {
+  max-width: 100%;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  height: auto;
+  border: 0;
+  border-radius: var(--radius);
+  margin: 1.5rem 0;
+}
 
 /* --- Tables (Club Records etc) --- */
 .records-table {
