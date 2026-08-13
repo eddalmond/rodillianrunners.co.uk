@@ -246,12 +246,12 @@ body {
   color: var(--text);
   transition: border-color 0.15s ease, transform 0.15s ease;
 }
-.activity-card,
-.activity-card:visited {
+.activity-card.activity-card,
+.activity-card.activity-card:visited {
   color: var(--text);
   text-decoration: none;
 }
-.activity-card:hover {
+.activity-card.activity-card:hover {
   border-color: var(--green);
   border-left-color: var(--green);
   transform: translateY(-2px);
@@ -267,21 +267,22 @@ body {
   color: var(--text-muted);
   font-size: 0.95rem;
 }
-.activity-card-cta {
+.activity-card.activity-card .activity-card-cta {
   color: var(--red);
   font-size: 0.9rem;
   font-weight: 600;
+  text-decoration: none;
 }
-.activity-card:hover .activity-card-cta {
+.activity-card.activity-card:hover .activity-card-cta {
   color: var(--green);
 }
 /* Activity card sits inside an <a>, so its inner <p> and <h3> inherit
    underline + link colour from the page-content a rule. Strip those. */
-.activity-card:hover,
-.activity-card:hover p,
-.activity-card:hover h3 { text-decoration: none; }
-.activity-card p,
-.activity-card h3 { text-decoration: none; }
+.activity-card.activity-card:hover,
+.activity-card.activity-card:hover p,
+.activity-card.activity-card:hover h3 { text-decoration: none; }
+.activity-card.activity-card p,
+.activity-card.activity-card h3 { text-decoration: none; }
 .page-content p,
 .home p { margin: 1rem 0; }
 .page-content a,
