@@ -1,7 +1,7 @@
 {{- /*
   Rodillian Runners — Base Template
-  - Mobile-first
-  - WordPress Blocksy-feel: clean header, narrow content column, sans-serif body
+  - Dark theme matching WordPress/Blocksy
+  - Centred logo, nav below, red copyright bar at bottom
 */ -}}
 <!DOCTYPE html>
 <html lang="en-GB">
@@ -17,7 +17,7 @@
   <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
   <meta property="og:url" content="{{ .Permalink }}">
   <meta property="og:image" content="{{ .Site.BaseURL }}images/banner.jpeg">
-  <meta name="theme-color" content="#1f4e79">
+  <meta name="theme-color" content="#000000">
   <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
@@ -25,9 +25,8 @@
 
   <header class="site-header">
     <div class="container">
-      <a href="/" class="site-brand">
-        <img src="/images/rods-logo.jpeg" alt="Rodillian Runners" class="site-logo">
-        <span class="site-title">Rodillian Runners</span>
+      <a href="/" class="site-brand" aria-label="Rodillian Runners — home">
+        <img src="/images/rods-logo.jpeg" alt="" class="site-logo">
       </a>
       <nav class="primary-nav" aria-label="Primary">
         <button class="nav-toggle" aria-expanded="false" aria-controls="primary-menu">
@@ -62,12 +61,14 @@
 
   <footer class="site-footer">
     <div class="container">
-      <p>&copy; {{ now.Format "2006" }} Rodillian Runners. Small, friendly running club based in Stanley, Wakefield.</p>
       <ul class="social-links">
         {{ range .Site.Menus.footer }}
           <li><a href="{{ .URL }}" target="_blank" rel="noopener noreferrer">{{ .Name }}</a></li>
         {{ end }}
       </ul>
+    </div>
+    <div class="copyright-bar">
+      <p>&copy; {{ now.Format "2006" }} Rodillian Runners. Small, friendly running club based in Stanley, Wakefield.</p>
     </div>
   </footer>
 
