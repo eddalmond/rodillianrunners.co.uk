@@ -52,7 +52,7 @@
         <ul id="primary-menu" class="nav-list">
           {{ range .Site.Menus.main }}
             <li{{ if .HasChildren }} class="has-children"{{ end }}>
-              <a href="{{ .URL }}"{{ if eq .URL "/" }} aria-current="page"{{ end }}>{{ .Name }}</a>
+              <a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} aria-current="page"{{ end }}>{{ .Name }}</a>
               {{ if .HasChildren }}
                 <ul class="sub-menu">
                   {{ range .Children }}
