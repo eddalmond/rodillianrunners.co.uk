@@ -4,7 +4,7 @@ title: Home
 
 Rodillian Runners is a small, friendly running club based in Stanley, Wakefield. We meet for training most Tuesdays at 7:00pm at Stanley Rodillians RUFC, Lee Moor Road, Stanley, WF3 4EF. Once a month we have the [Distance League](/club-activities/distance-league/) event where we meet at a variety of locations shown in the [club calendar](/club-activities/).
 
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2366.7!2d-1.4767!3d53.7142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4879639b6e3c0001%3A0x1234567890abcdef!2sStanley%20Rodillians%20RUFC!5e0!3m2!1sen!2suk!4v1700000000000" width="600" height="450" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map showing Stanley Rodillians RUFC location"></iframe>
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2366.7!2d-1.4767!3d53.7142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4879639b6e3c0001%3A0x1234567890abcdef!2sStanley%20Rodillians%20RUFC!5e0!3m2!1sen!2suk!4v1700000000000" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map showing Stanley Rodillians RUFC location"></iframe>
 
 If you are new to running or just want to run with a group of friendly, like-minded people then get in touch. We're a sociable bunch and love to meet new people!
 
