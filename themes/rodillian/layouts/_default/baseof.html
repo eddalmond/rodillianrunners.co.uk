@@ -1,7 +1,7 @@
 {{- /*
   Rodillian Runners — Base Template
-  - Dark theme matching WordPress/Blocksy
-  - Centred logo, nav below, red copyright bar at bottom
+  - Dark theme, red/green accents
+  - Logo + nav inline, modernised 3-column footer
 */ -}}
 <!DOCTYPE html>
 <html lang="en-GB">
@@ -25,9 +25,10 @@
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
-    <div class="container">
+    <div class="container site-header-inner">
       <a href="/" class="site-brand" aria-label="Rodillian Runners — home">
         <img src="/images/rods-logo.jpeg" alt="" class="site-logo">
+        <span class="site-wordmark">Rodillian Runners</span>
       </a>
       <nav class="primary-nav" aria-label="Primary">
         <button class="nav-toggle" aria-expanded="false" aria-controls="primary-menu">
@@ -48,7 +49,7 @@
               {{ end }}
             {{ end }}
             <li{{ if .HasChildren }} class="has-children"{{ end }}>
-              <a href="{{ .URL }}"{{ if $isActive }} aria-current="page"{{ end }}>{{ .Name }}</a>
+              <a href="{{ .URL }}"{{ if $isActive }} aria-current="page"{{ end }}>{{ .Name }}{{ if .HasChildren }} <span class="nav-chevron" aria-hidden="true">&#9662;</span>{{ end }}</a>
               {{ if .HasChildren }}
                 <ul class="sub-menu">
                   {{ range .Children }}
@@ -63,22 +64,65 @@
     </div>
   </header>
 
-  <main id="main" class="site-main">
-    <div class="container">
+  <main id="main" class="site-main{{ if .IsHome }} site-main-home{{ end }}">
+    {{ if .IsHome }}
       {{ block "main" . }}{{ end }}
-    </div>
+    {{ else }}
+      <div class="container">
+        {{ block "main" . }}{{ end }}
+      </div>
+    {{ end }}
   </main>
 
   <footer class="site-footer">
-    <div class="container">
-      <ul class="social-links">
-        {{ range .Site.Menus.footer }}
-          <li><a href="{{ .URL }}" target="_blank" rel="noopener noreferrer">{{ .Name }}</a></li>
-        {{ end }}
-      </ul>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h3 class="footer-heading">Rodillian Runners</h3>
+        <p>A small, friendly running club based in Stanley, Wakefield. We meet most Tuesdays at 7:00 PM at Stanley Rodillians RUFC.</p>
+        <p class="footer-meta">Affiliated with England Athletics.</p>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-heading">Quick Links</h3>
+        <ul class="footer-list">
+          <li><a href="/club-activities/">Club Activities</a></li>
+          <li><a href="/club-activities/distance-league/">Distance League</a></li>
+          <li><a href="/club-activities/championship/">Championship</a></li>
+          <li><a href="/club-records/">Club Records</a></li>
+          <li><a href="/membership/">Membership</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-heading">Connect</h3>
+        <ul class="social-list">
+          <li>
+            <a href="https://www.facebook.com/RodillianRunners" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/rodillianrunners/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.strava.com/clubs/rodillianrunners" target="_blank" rel="noopener noreferrer" aria-label="Strava">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.115 2.136 6 18.5h4.245l3.07-5.512L16.385 18.5H20.63L15.115 2.136Zm-3.66 13.31-1.937 3.477L7.582 15.45l1.937-3.477 1.937 3.473Z"/></svg>
+            </a>
+          </li>
+        </ul>
+        <h4 class="footer-subheading">Affiliations</h4>
+        <ul class="footer-list small">
+          <li><a href="https://www.parkrun.org.uk/" target="_blank" rel="noopener noreferrer">parkrun</a></li>
+          <li><a href="https://www.runbritain.com/" target="_blank" rel="noopener noreferrer">Run England</a></li>
+          <li><a href="https://www.sportenglandclubmatters.com/" target="_blank" rel="noopener noreferrer">Sport England</a></li>
+        </ul>
+      </div>
     </div>
     <div class="copyright-bar">
-      <p>&copy; {{ now.Format "2006" }} Rodillian Runners. Small, friendly running club based in Stanley, Wakefield.</p>
+      <div class="container">
+        <p>&copy; {{ now.Format "2006" }} Rodillian Runners &middot; Stanley, Wakefield</p>
+      </div>
     </div>
   </footer>
 
