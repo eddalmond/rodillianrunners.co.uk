@@ -1,0 +1,219 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+#
+# Sveltia CMS configuration for the Rodillian Runners static site.
+#
+# Editor flow:
+#   1. Open https://rodillianrunners.co.uk/admin/
+#   2. Click "Sign in with Token" and paste a GitHub fine-grained PAT.
+#   3. Pick a page or record, edit, click "Publish" — Sveltia commits to main.
+#   4. Railway watches main, rebuilds the site, deploys within ~60s.
+#
+# See README.md → "Editor setup" for the full checklist the site owner runs once.
+
+# -----------------------------------------------------------------------------
+# Backend
+# -----------------------------------------------------------------------------
+backend:
+  name: github
+  repo: eddalmond/rodillianrunners.co.uk
+  branch: main
+  # Set false so Sveltia does NOT add `[skip ci]` to commit messages.
+  # Railway watches main and rebuilds on every push; we want the rebuild.
+  automatic_deployments: false
+  # Custom commit messages. Sveltia already squashes all saves in a single
+  # publishing session into one commit per file by default; these templates
+  # control the wording of that commit.
+  commit_messages:
+    create: "cms: create {{collection}} “{{slug}}”"
+    update: "cms: update {{collection}} “{{slug}}”"
+    delete: "cms: delete {{collection}} “{{slug}}”"
+    uploadMedia: "cms: upload {{path}}"
+    deleteMedia: "cms: delete {{path}}"
+    openAuthoring: "cms: {{message}}"
+
+# -----------------------------------------------------------------------------
+# Media (image uploads)
+# -----------------------------------------------------------------------------
+# Editors can upload images via the CMS. Files land in the theme's static
+# directory so they're served at the same path after Hugo builds. We keep
+# uploads under /images/uploads/ to keep them separate from the curated
+# theme assets.
+media_folder: "themes/rodillian/static/images/uploads"
+public_folder: "/images/uploads"
+
+# -----------------------------------------------------------------------------
+# Site URL — used for preview links from the editor.
+# -----------------------------------------------------------------------------
+site_url: "https://rodillianrunners.co.uk"
+display_url: "https://rodillianrunners.co.uk"
+logo_url: "/images/og-image.png"   # optional; harmless if missing
+
+# -----------------------------------------------------------------------------
+# Editor locale
+# -----------------------------------------------------------------------------
+locale: en
+
+# -----------------------------------------------------------------------------
+# Collections
+# -----------------------------------------------------------------------------
+collections:
+
+  # ---------------------------------------------------------------------------
+  # Site pages — each is a single Markdown file in content/.
+  # Explicit file list (not folder-based) so editors can only edit what
+  # already exists; new pages should be created by a developer so front
+  # matter and bundle structure stay correct.
+  # ---------------------------------------------------------------------------
+  - name: pages
+    label: Site Pages
+    label_singular: Page
+    description: >
+      Top-level pages. Edit body text carefully — Hugo renders the Markdown
+      as-is. Use the preview link to see the result before publishing.
+    create: false
+    delete: false
+    editor:
+      preview: true
+    # We declare the schema as folder-like but the path is a single file
+      # per entry so each known page gets a clean, labelled form.
+    files:
+      - name: home
+        label: Home (hero text + intro)
+        file: content/_index.md
+        # `layout: home` is required — it selects the homepage template.
+        # Declared here so Sveltia doesn't strip it on save.
+        fields:
+          - { label: Title,    name: title,    widget: string }
+          - { label: Body,     name: body,     widget: markdown }
+          - { label: "Layout (don't change)", name: layout, widget: string, default: "home", hint: "Must match an existing template in themes/rodillian/layouts/. Current value selects the homepage template." }
+
+      - name: why
+        label: Why Rodillian Runners
+        file: content/why-rodillian-runners.md
+        fields:
+          - { label: Title,    name: title,    widget: string }
+          - { label: Body,     name: body,     widget: markdown }
+
+      - name: membership
+        label: Membership
+        file: content/membership.md
+        fields:
+          - { label: Title,    name: title,    widget: string }
+          - { label: Body,     name: body,     widget: markdown }
+
+      - name: contact
+        label: Contact Us
+        file: content/contact.md
+        # NOTE: the Formspree form ID currently lives inside the body
+        # (look for `formspree.io/f/...` in the action attribute of the
+        # <form> tag). Pulling it out into front matter would need a
+        # shortcode refactor of the contact page; not done yet.
+        fields:
+          - { label: Title,    name: title,    widget: string }
+          - { label: Body,     name: body,     widget: markdown }
+
+      - name: photos
+        label: Photos
+        file: content/photos.md
+        fields:
+          - { label: Title,    name: title,    widget: string }
+          - { label: Body,     name: body,     widget: markdown }
+
+      - name: club_records
+        label: Club Records (intro text only)
+        file: content/club-records.md
+        # This page embeds data/records/{female,male}.json via the theme.
+        # Only the intro Markdown is editable here; the records themselves
+        # live in the "Club Records Data" collection below.
+        fields:
+          - { label: Title,    name: title,    widget: string }
+          - { label: Body,     name: body,     widget: markdown }
+          - { label: "Layout (don't change)", name: layout, widget: string, default: "records", hint: "Must match an existing template in themes/rodillian/layouts/." }
+
+      - name: activities_index
+        label: Club Activities (section index)
+        file: content/club-activities/_index.md
+        fields:
+          - { label: Title,    name: title,    widget: string }
+          - { label: Body,     name: body,     widget: markdown }
+          - { label: "Layout (don't change)", name: layout, widget: string, default: "calendar", hint: "Must match an existing template in themes/rodillian/layouts/." }
+
+      - name: championship
+        label: Club Activities → Championship
+        file: content/club-activities/championship.md
+        fields:
+          - { label: Title,    name: title,    widget: string }
+          - { label: Body,     name: body,     widget: markdown }
+
+      - name: distance_league
+        label: Club Activities → Distance League
+        file: content/club-activities/distance-league.md
+        fields:
+          - { label: Title,    name: title,    widget: string }
+          - { label: Body,     name: body,     widget: markdown }
+
+      - name: champ_calendar
+        label: Club Activities → Championship Race Calendar
+        file: content/club-activities/championship-race-calendar.md
+        # This page embeds the JS calendar widget. Body should contain the
+        # intro paragraph; the <script> tag is added by the theme template.
+        fields:
+          - { label: Title,    name: title,    widget: string }
+          - { label: Body,     name: body,     widget: markdown }
+          - { label: "Layout (don't change)", name: layout, widget: string, default: "calendar", hint: "Must match an existing template in themes/rodillian/layouts/." }
+
+      - name: documents_index
+        label: Documents (section index)
+        file: content/documents/_index.md
+        fields:
+          - { label: Title,       name: title,       widget: string }
+          - { label: "Meta description (for search engines)", name: description, widget: text, required: false }
+          - { label: Body,        name: body,        widget: markdown }
+
+  # ---------------------------------------------------------------------------
+  # Club records data — raw JSON editing.
+  #
+  # The records have a complex nested-array shape (header row + rows grouped
+  # in triples per distance). Sveltia can't model that with structured
+  # widgets without making the form worse than the underlying file, so
+  # editors see the file as raw JSON with syntax highlighting.
+  #
+  # IMPORTANT: the file is parsed by Hugo and by the records-table partial,
+  # which expects 9 columns and rows-in-triples. If you change column count
+  # or row grouping, the page will render incorrectly. Schema is documented
+  # at the top of each file.
+  # ---------------------------------------------------------------------------
+  - name: records
+    label: Club Records Data
+    label_singular: Records file
+    description: >
+      Raw JSON for the club records table. Edit with care — schema is
+      `header` (9 strings) + `rows` (groups of 3: name, time, date).
+    create: false
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: female_records
+        label: Female Records (data/records/female.json)
+        file: data/records/female.json
+        format: raw
+        fields:
+          - name: body
+            label: female.json
+            widget: code
+            output_code_only: true
+            allow_language_selection: false
+            default_language: json
+
+      - name: male_records
+        label: Male Records (data/records/male.json)
+        file: data/records/male.json
+        format: raw
+        fields:
+          - name: body
+            label: male.json
+            widget: code
+            output_code_only: true
+            allow_language_selection: false
+            default_language: json

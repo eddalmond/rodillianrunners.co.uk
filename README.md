@@ -57,9 +57,28 @@ DNS cutover (when ready): point `rodillianrunners.co.uk` A and CNAME records at 
 
 ## Editing content
 
+You have two ways to edit the site.
+
+### Option A — Content editor (no Git required) — preferred for committee members
+
+The site has a built-in admin panel at **`/admin/`** powered by [Sveltia CMS](https://sveltiacms.app/). Editors get a form-based UI in the browser. When they click "Publish", Sveltia commits the change to `main` and Railway rebuilds + deploys within about 60 seconds.
+
+The editor is configured to expose:
+- Every page under `content/` (title + Markdown body, plus the Formspree form ID on the contact page)
+- The raw `data/records/female.json` and `data/records/male.json` files for club records
+
+Editors do **not** need Git, Markdown, or any local tooling. They just need:
+1. A browser
+2. A GitHub account added as a collaborator on this repo (with write access)
+3. A GitHub fine-grained Personal Access Token (PAT) they paste into the Sveltia login screen on first use. The PAT is stored in their browser's local storage; they only re-enter it if they sign out or clear cookies.
+
+See **Editor setup** below for the one-time configuration the site owner has to do.
+
+### Option B — Edit files directly (for the site owner / contributors comfortable with Git)
+
 Each page is a Markdown file in `content/`. The site uses Hugo's "page bundles" model — `content/club-activities/championship.md` becomes `https://rodillianrunners.co.uk/club-activities/championship/`.
 
-To update club records:
+To update club records via the JSON:
 1. Edit `data/records/female.json` or `data/records/male.json`
 2. Each row is an array; rows are grouped in 3s per distance
 3. Open a PR, preview on Railway, merge when happy
@@ -69,11 +88,60 @@ To update the calendar:
 2. Push a commit (or trigger Railway redeploy) — the build hook fetches the latest ICS
 3. New events appear after the next deploy
 
+## Editor setup (one-time, ~10 minutes)
+
+The site owner (or whoever controls the GitHub repo) does this once. After that, every invited editor signs in with their own GitHub PAT — no further config.
+
+1. **Invite editors as collaborators on GitHub.**
+   Repo → Settings → Collaborators → Add people. They need **Write** access (not Read, not Admin). Sveltia will fail to commit if their token is from a read-only account.
+
+2. **Tell each editor to create a GitHub fine-grained PAT.**
+   https://github.com/settings/personal-access-tokens/new
+   - Resource owner: `eddalmond`
+   - Repository access: **Only select repositories → rodillianrunners.co.uk**
+   - Permissions: **Contents → Read and write** (everything else: no access)
+   - Copy the token. They will paste it into Sveltia on first login.
+
+3. **Verify the admin loads.** Open `https://rodillianrunners.co.uk/admin/`. You should see the Sveltia login screen, then the workspace with two collections: **Site Pages** and **Club Records Data**. Sign in with your own PAT first to confirm everything is wired up before inviting others.
+
+4. **Verify a publish round-trips.** Edit a low-stakes page (e.g. `why-rodillian-runners.md` — change a comma to a full stop), click Publish, watch the commit appear on GitHub, and confirm the Railway build runs and the live site updates. If it does, you're done. If not, see **Troubleshooting** below.
+
+That's it. There is no OAuth app to register, no proxy server to host, no third-party service. Sveltia talks to the GitHub API directly with the editor's PAT.
+
+## Editor workflow (committee members)
+
+1. Go to `https://rodillianrunners.co.uk/admin/`
+2. Click **Sign in** and paste your GitHub PAT when prompted
+3. Pick a page (or "Club Records Data" for records) from the left sidebar
+4. Edit. Sveltia shows a live preview if available
+5. Click **Publish**. Sveltia writes a commit like `cms: update Site Pages "Why Rodillian Runners"` to `main`
+6. Railway picks up the commit, rebuilds the site, deploys — usually within a minute
+7. Refresh the live page to see your change
+
+**Club records schema reminder:** the records JSON expects `header` (9 strings, one per column) and `rows` (groups of 3: athlete name, time, date). If you change the number of columns or break the row grouping, the table will render incorrectly. The page in the CMS just opens the raw JSON; treat it like a spreadsheet — keep the structure consistent.
+
+## Troubleshooting
+
+- **"Failed to load Sveltia CMS"** on `/admin/`: the JS CDN is blocked. Check the browser console; corporate networks sometimes block `unpkg.com`. Workaround: switch to a different network or self-host the bundle (not currently set up).
+- **"403 Forbidden" when publishing:** the PAT doesn't have Contents → Read and write, or the editor's GitHub account doesn't have Write access to the repo. Re-check both.
+- **Commit appears on GitHub but the live site doesn't change:** Railway build failed. Check the Railway dashboard for the project, look at the latest deploy, and read the build log. The site owner has access; editors do not (by design).
+- **"Cannot read property of undefined" inside the editor:** an out-of-date config.yml. Hard-refresh the admin page (Cmd/Ctrl+Shift+R) to pick up the latest schema.
+
+## Deliberately not implemented
+
+These were considered and skipped — happy to add them if you want them:
+
+- **News/Posts collection.** The site has no chronological content today, and adding one means designing a list page, RSS feed, and tag scheme. The recommendations in the upstream CMS report assume one exists.
+- **Club records as a structured form.** The records JSON has a deeply nested shape (rows-in-triples per distance × 9 age groups). Modelling it as a Sveltia list-of-lists is possible but the form is harder to use than the raw JSON with syntax highlighting. Keep the JSON; it's a good format.
+- **Google Sheets for records or distance league.** Records are hand-curated JSON — moving to Sheets would lose git-versioning and add a sync step. Distance League results could be a Sheet (see `content/club-activities/distance-league.md` — currently a one-paragraph page) but that's a separate piece of work.
+- **Newsletter / membership signup form.** Out of scope for "non-tech editor flow" — would need either a third-party service (Mailchimp, Buttondown) or a Cloudflare Worker.
+
 ## What's NOT here yet
 
 - Real Formspree form ID (placeholder active)
 - Email forwarding for admin@rodillianrunners.co.uk (Cloudflare Email Routing post-cutover)
 - Privacy statement page (PDFs are linked, but a plain-text page would be friendlier)
+- News/Posts collection (see "Deliberately not implemented" above)
 
 ## Licence
 

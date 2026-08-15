@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Rodillian Runners — Content Editor</title>
+  <link rel="icon" href="/favicon.ico" />
+  <link
+    href="/admin/config.yml"
+    type="application/yaml"
+    rel="cms-config-url"
+  />
+  <style>
+    /* Minimal in-page styles so the admin shell doesn't flash unstyled content
+       before Sveltia's bundle takes over. */
+    html, body { margin: 0; padding: 0; height: 100%; }
+    body {
+      font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: #1f2937;
+      background: #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .rodillian-admin-fallback {
+      max-width: 32rem;
+      padding: 2rem;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .rodillian-admin-fallback h1 {
+      font-size: 1.25rem;
+      margin: 0 0 0.5rem;
+    }
+    .rodillian-admin-fallback p {
+      margin: 0.5rem 0;
+      color: #4b5563;
+    }
+  </style>
+  <script type="module">
+    // Sveltia CMS: drop-in replacement for Decap CMS.
+    // Auth: "Sign in with Token" using a GitHub fine-grained PAT. No OAuth
+    // server / proxy required. See README.md for the editor setup checklist.
+    import "https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js";
+  </script>
+</head>
+<body>
+  <noscript>
+    <div class="rodillian-admin-fallback">
+      <h1>JavaScript is required</h1>
+      <p>The Rodillian Runners content editor needs JavaScript to load.
+         Please enable it and refresh the page.</p>
+    </div>
+  </noscript>
+  <div class="rodillian-admin-fallback" hidden>
+    <h1>Loading editor…</h1>
+    <p>If this message persists, check the browser console for errors.</p>
+  </div>
+</body>
+</html>
