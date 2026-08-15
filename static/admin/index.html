@@ -11,53 +11,52 @@
     type="application/yaml"
     rel="cms-config-url"
   />
-  <style>
-    /* Minimal in-page styles so the admin shell doesn't flash unstyled content
-       before Sveltia's bundle takes over. */
-    html, body { margin: 0; padding: 0; height: 100%; }
-    body {
-      font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      color: #1f2937;
-      background: #f3f4f6;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+
+  <!--
+    Sveltia CMS — drop-in successor to Decap CMS.
+
+    The script tag below MUST NOT have type="module". Sveltia is
+    distributed as a classic script and auto-mounts into the body.
+    Adding type="module" makes the bundle load but never mount,
+    which produces a blank page. This is documented in the
+    Sveltia "Common Mistakes" section of the Start guide.
+
+    The body must be effectively empty so Sveltia can render. Any
+    pre-mount UI here would be wiped on mount.
+  -->
+  <script>
+    // Surface any uncaught error or unhandled promise rejection on
+    // the page as a visible diagnostic. Helps turn a blank page into
+    // a useful error message when Sveltia fails to initialise.
+    function showAdminError(title, details) {
+      var d = document.createElement('div');
+      d.style.cssText = 'max-width:48rem;margin:2rem auto;padding:1.5rem;background:#fff;border-left:4px solid #dc2626;border-radius:8px;font:14px/1.5 -apple-system,BlinkMacSystemFont,sans-serif;';
+      var h = document.createElement('h1');
+      h.style.cssText = 'color:#dc2626;font-size:1.1rem;margin:0 0 .5rem;';
+      h.textContent = title;
+      var p = document.createElement('pre');
+      p.style.cssText = 'background:#1f2937;color:#f9fafb;padding:1rem;border-radius:4px;overflow-x:auto;white-space:pre-wrap;font-size:12px;';
+      p.textContent = details;
+      d.appendChild(h); d.appendChild(p);
+      (document.body || document.documentElement).appendChild(d);
     }
-    .rodillian-admin-fallback {
-      max-width: 32rem;
-      padding: 2rem;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    .rodillian-admin-fallback h1 {
-      font-size: 1.25rem;
-      margin: 0 0 0.5rem;
-    }
-    .rodillian-admin-fallback p {
-      margin: 0.5rem 0;
-      color: #4b5563;
-    }
-  </style>
-  <script type="module">
-    // Sveltia CMS: drop-in replacement for Decap CMS.
-    // Auth: "Sign in with Token" using a GitHub fine-grained PAT. No OAuth
-    // server / proxy required. See README.md for the editor setup checklist.
-    import "https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js";
+    window.addEventListener('error', function (e) {
+      showAdminError(
+        'Editor failed to load',
+        (e.error && (e.error.stack || e.error.message)) || e.message || String(e)
+      );
+    });
+    window.addEventListener('unhandledrejection', function (e) {
+      var r = e.reason;
+      showAdminError(
+        'Editor failed to initialise',
+        (r && (r.stack || r.message)) || String(r)
+      );
+    });
   </script>
+  <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
 </head>
 <body>
-  <noscript>
-    <div class="rodillian-admin-fallback">
-      <h1>JavaScript is required</h1>
-      <p>The Rodillian Runners content editor needs JavaScript to load.
-         Please enable it and refresh the page.</p>
-    </div>
-  </noscript>
-  <div class="rodillian-admin-fallback" hidden>
-    <h1>Loading editor…</h1>
-    <p>If this message persists, check the browser console for errors.</p>
-  </div>
+  <!-- Intentionally empty. Sveltia mounts its UI here on load. -->
 </body>
 </html>
