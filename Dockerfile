@@ -22,7 +22,11 @@ COPY hugo.toml /src/
 COPY content/ /src/content/
 COPY data/ /src/data/
 COPY scripts/ /src/scripts/
-# Note: static/ assets are inside the theme (themes/rodillian/static/)
+# 3. Project-level static/ (currently only the Sveltia CMS admin shell
+#    at static/admin/). Theme static assets live at themes/rodillian/static/.
+#    Do not add layouts/, assets/, i18n/ here — those directories are
+#    intentionally absent (empty in git, would break the COPY).
+COPY static/ /src/static/
 
 # Pre-fetch the Google Calendar ICS feed (avoids CORS at runtime)
 RUN bash scripts/fetch-calendar.sh
