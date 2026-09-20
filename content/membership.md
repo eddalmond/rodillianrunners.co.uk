@@ -8,9 +8,8 @@ Club members can choose to be licensed by UKA for competition. The main benefit 
 
 In your first year, membership costs £60. This includes a free club t-shirt. In second and subsequent years the membership costs reduce to £35.
 
-- [Rodillian Runners Membership Form 2026](/documents/Rodillian-Runners-Membership-Form-2026.pdf)
-- [Enquirers privacy statement](/documents/enquirers-privacy-statement.pdf)
-- [Members privacy statement](/documents/members-privacy-statement.pdf)
+- [Rodillian Runners Membership](/documents/Rodillian-Runners-Membership-Form-2026.pdf)
+- Our privacy statement for members of the club can be found [here](/documents/members-privacy-statement.pdf).
 
 ## Club Policies and Information
 

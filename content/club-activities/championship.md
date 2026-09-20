@@ -8,19 +8,21 @@ Since 2016, we now have a prize for the "Most Improved Athlete". This will be aw
 
 ## Past Winners
 
-- **2010** — Steven Pilling
-- **2011** — Steven Pilling
-- **2012** — Men: John McCarthy, Women: Louise Walker
-- **2013** — Men: Adam Mills, Women: Sharon Richman
-- **2014** — Men: Adam Mills, Women: Sharon Richman
-- **2015** — Men: Adam Mills, Women: Jenny Butler
-- **2016** — Men: Adam Mills, Women: Jen Almond, Most Improved: John Walsh
-- **2017** — Men: Paul Wood, Women: Jen Almond, Most Improved: Edd Almond
-- **2018** — Men: Ian Harrison, Women: Nicola Jones, Most Improved: Richard Mann
-- **2019** — Men: Ian Harrison, Women: Beth Gripton, Most Improved: John Walsh
-- **2020** — Men: Gary Coley, Women: Helen Mann, Most Improved: Richard Mann
-  - Runners up: Men: Justin Wilson, Women: Claire Telford, Most Improved: Jon Vaile
+- 2010 – Steven Pilling
+- 2011 – Steven Pilling
+- 2012 – **Men:** John McCarthy **Women:** Louise Walker
+- 2013 – **Men:** Adam Mills **Women:** Sharon Richman
+- 2014 – **Men:** Adam Mills **Women:** Sharon Richman
+- 2015 – **Men:** Adam Mills **Women:** Jenny Butler
+- 2016 – **Men:** Adam Mills **Women:** Jen Almond **Most Improved:** John Walsh
+- 2017 – **Men:** Paul Wood **Women:** Jen Almond **Most Improved:** Edd Almond
+- 2018 – **Men:** Ian Harrison **Women:** Nicola Jones **Most Improved:** Richard Mann
+- 2019 – **Men:** Ian Harrison **Women:** Beth Gripton **Most Improved:** John Walsh
+- 2020 – **Men:** Gary Coley **Women:** Helen Mann **Most Improved:** Richard Mann
+  - Runners up: **Men:** Justin Wilson **Women:** Claire Telford **Most Improved:** Jon Vaile
 
-Championship Rules (2020, accounting for virtual races): [download PDF](/documents/official-committee-rules-2020.pdf)
+Note that for 2020 we are using updated rules to take account of virtual races: [Championship Rules](/documents/official-committee-rules-2020.pdf).
 
 Full 2020 results spreadsheet is [here](/documents/2020-championship-all-results.xlsx).
+
+## 2022 Status
