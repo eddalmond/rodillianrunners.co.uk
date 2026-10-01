@@ -57,9 +57,6 @@
   <!-- Netlify Identity Widget for authentication -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
-  <!-- Decap CMS -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-
   <!-- Handle Identity login redirects -->
   <script>
     if (window.netlifyIdentity) {
@@ -76,5 +73,8 @@
 <body>
   <!-- Decap CMS mounts into this root element -->
   <div id="nc-root"></div>
+
+  <!-- Decap CMS - loaded after DOM is ready -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
 </html>
