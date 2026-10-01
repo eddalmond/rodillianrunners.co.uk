@@ -35,12 +35,12 @@ backend:
   # publishing session into one commit per file by default; these templates
   # control the wording of that commit.
   commit_messages:
-    create: “cms: create {{collection}} “{{slug}}””
-    update: “cms: update {{collection}} “{{slug}}””
-    delete: “cms: delete {{collection}} “{{slug}}””
-    uploadMedia: “cms: upload {{path}}”
-    deleteMedia: “cms: delete {{path}}”
-    openAuthoring: “cms: {{message}}”
+    create: 'cms: create {{collection}} “{{slug}}”'
+    update: 'cms: update {{collection}} “{{slug}}”'
+    delete: 'cms: delete {{collection}} “{{slug}}”'
+    uploadMedia: 'cms: upload {{path}}'
+    deleteMedia: 'cms: delete {{path}}'
+    openAuthoring: 'cms: {{message}}'
 
 # -----------------------------------------------------------------------------
 # Media (image uploads)
