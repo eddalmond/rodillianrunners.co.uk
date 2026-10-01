@@ -54,10 +54,16 @@ public_folder: "/images/uploads"
 
 # -----------------------------------------------------------------------------
 # Site URL — used for preview links from the editor.
+# Production site is hosted on Railway, but Netlify URL is used for
+# authentication via Git Gateway.
 # -----------------------------------------------------------------------------
 site_url: "https://rodillianrunners.co.uk"
 display_url: "https://rodillianrunners.co.uk"
 logo_url: "/images/og-image.png"   # optional; harmless if missing
+
+# Netlify site for Git Gateway authentication
+# This is NOT the hosting URL - Railway hosts the actual site
+netlify_site_url: "https://rad-puffpuff-9f1eb1.netlify.app"
 
 # -----------------------------------------------------------------------------
 # Editor locale
