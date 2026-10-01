@@ -6,6 +6,10 @@
   When a user logs in via the CMS, this script redirects them
   to /admin/ after successful authentication.
 -->
+<script>
+  // Configure Netlify Identity to use the specific Netlify site
+  window.netlifyIdentitySiteURL = "https://rad-puffpuff-9f1eb1.netlify.app";
+</script>
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script>
   if (window.netlifyIdentity) {
