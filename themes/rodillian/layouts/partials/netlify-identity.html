@@ -1,0 +1,20 @@
+<!-- Netlify Identity Widget -->
+<!--
+  Enables Netlify Identity authentication across the site.
+  Required for Decap CMS with Git Gateway backend.
+
+  When a user logs in via the CMS, this script redirects them
+  to /admin/ after successful authentication.
+-->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", function(user) {
+      if (!user) {
+        window.netlifyIdentity.on("login", function() {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>

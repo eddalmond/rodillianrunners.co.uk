@@ -1,0 +1,194 @@
+/* WordPress-style login page customization for Netlify Identity */
+
+/* Overall modal styling */
+[data-netlify-identity-menu],
+[data-netlify-identity-signup],
+[data-netlify-identity-login] {
+  background: #f0f0f1 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+}
+
+/* Modal content box */
+.modalContent {
+  border-radius: 0 !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,.13) !important;
+  background: #fff !important;
+}
+
+/* Header styling */
+.modalHeader {
+  background: #fff !important;
+  border-bottom: 1px solid #dcdcde !important;
+  padding: 20px 24px !important;
+}
+
+.modalHeader h2 {
+  color: #1d2327 !important;
+  font-size: 23px !important;
+  font-weight: 400 !important;
+  margin: 0 !important;
+  line-height: 1.3 !important;
+}
+
+/* Form styling */
+.modalBody {
+  padding: 24px !important;
+  background: #fff !important;
+}
+
+.formGroup {
+  margin-bottom: 16px !important;
+}
+
+.formGroup label {
+  color: #1d2327 !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  margin-bottom: 3px !important;
+  display: block !important;
+}
+
+.formGroup input {
+  border: 1px solid #8c8f94 !important;
+  border-radius: 4px !important;
+  padding: 3px 8px !important;
+  font-size: 14px !important;
+  line-height: 2 !important;
+  min-height: 30px !important;
+  width: 100% !important;
+  background: #fff !important;
+  color: #2c3338 !important;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.07) !important;
+}
+
+.formGroup input:focus {
+  border-color: #2271b1 !important;
+  box-shadow: 0 0 0 1px #2271b1 !important;
+  outline: 2px solid transparent !important;
+}
+
+/* Button styling - WordPress blue */
+.btn,
+button[type="submit"],
+.btnLink {
+  background: #2271b1 !important;
+  border: 1px solid #2271b1 !important;
+  color: #fff !important;
+  border-radius: 3px !important;
+  padding: 0 12px !important;
+  font-size: 13px !important;
+  line-height: 2.15384615 !important;
+  min-height: 30px !important;
+  font-weight: 400 !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+}
+
+.btn:hover,
+button[type="submit"]:hover {
+  background: #135e96 !important;
+  border-color: #135e96 !important;
+  color: #fff !important;
+}
+
+.btn:active,
+button[type="submit"]:active {
+  background: #135e96 !important;
+  border-color: #135e96 !important;
+  box-shadow: inset 0 2px 5px -3px rgba(0,0,0,.5) !important;
+}
+
+/* Secondary/link buttons */
+.btnLink {
+  background: transparent !important;
+  border: none !important;
+  color: #2271b1 !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  min-height: auto !important;
+}
+
+.btnLink:hover {
+  background: transparent !important;
+  color: #135e96 !important;
+  text-decoration: underline !important;
+}
+
+/* Footer styling */
+.modalFooter {
+  background: #fff !important;
+  border-top: 1px solid #dcdcde !important;
+  padding: 16px 24px !important;
+}
+
+/* Error/success messages */
+.flashMessage {
+  border-left: 4px solid #d63638 !important;
+  background: #fcf0f1 !important;
+  color: #1d2327 !important;
+  padding: 12px !important;
+  margin-bottom: 16px !important;
+  border-radius: 0 !important;
+}
+
+.flashMessage.success {
+  border-left-color: #00a32a !important;
+  background: #edfaef !important;
+}
+
+/* Loading state */
+.btn.loading,
+button[type="submit"].loading {
+  opacity: 0.6 !important;
+  cursor: wait !important;
+}
+
+/* Tab styling for signup/login toggle */
+.tabs {
+  border-bottom: 1px solid #dcdcde !important;
+  margin-bottom: 24px !important;
+}
+
+.tabButton {
+  color: #646970 !important;
+  border: none !important;
+  border-bottom: 4px solid transparent !important;
+  background: transparent !important;
+  padding: 16px 16px 12px !important;
+  font-size: 14px !important;
+  cursor: pointer !important;
+}
+
+.tabButton:hover {
+  color: #135e96 !important;
+}
+
+.tabButton.active {
+  color: #1d2327 !important;
+  border-bottom-color: #2271b1 !important;
+}
+
+/* Logo area (if you want to add Rodillian Runners logo later) */
+.modalHeader::before {
+  content: '';
+  display: block;
+  margin-bottom: 16px;
+  /* Add background-image here if you want a logo */
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .modalContent {
+    width: 100% !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  .modalHeader,
+  .modalBody,
+  .modalFooter {
+    padding: 16px !important;
+  }
+}

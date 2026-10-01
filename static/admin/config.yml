@@ -13,23 +13,34 @@
 # -----------------------------------------------------------------------------
 # Backend
 # -----------------------------------------------------------------------------
+# Git Gateway backend with Netlify Identity authentication.
+# Users log in with email/password (no GitHub account needed).
+# You manage users through the Netlify Identity dashboard.
+#
+# Setup required (one-time):
+#   1. Create Netlify account and import this repo
+#   2. Enable Netlify Identity (Site settings → Identity)
+#   3. Enable Git Gateway (Identity → Services → Git Gateway)
+#   4. Set registration to “Invite only”
+#   5. Invite users via email from the Netlify dashboard
+#
+# See DECAP_CMS_MIGRATION_PLAN.md for full setup instructions.
 backend:
-  name: github
-  repo: eddalmond/rodillianrunners.co.uk
+  name: git-gateway
   branch: main
-  # Set false so Sveltia does NOT add `[skip ci]` to commit messages.
+  # Set false so Decap does NOT add `[skip ci]` to commit messages.
   # Railway watches main and rebuilds on every push; we want the rebuild.
   automatic_deployments: false
-  # Custom commit messages. Sveltia already squashes all saves in a single
+  # Custom commit messages. Decap squashes all saves in a single
   # publishing session into one commit per file by default; these templates
   # control the wording of that commit.
   commit_messages:
-    create: "cms: create {{collection}} “{{slug}}”"
-    update: "cms: update {{collection}} “{{slug}}”"
-    delete: "cms: delete {{collection}} “{{slug}}”"
-    uploadMedia: "cms: upload {{path}}"
-    deleteMedia: "cms: delete {{path}}"
-    openAuthoring: "cms: {{message}}"
+    create: “cms: create {{collection}} “{{slug}}””
+    update: “cms: update {{collection}} “{{slug}}””
+    delete: “cms: delete {{collection}} “{{slug}}””
+    uploadMedia: “cms: upload {{path}}”
+    deleteMedia: “cms: delete {{path}}”
+    openAuthoring: “cms: {{message}}”
 
 # -----------------------------------------------------------------------------
 # Media (image uploads)

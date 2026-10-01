@@ -6,6 +6,7 @@
   <meta name="robots" content="noindex,nofollow" />
   <title>Rodillian Runners — Content Editor</title>
   <link rel="icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/admin/custom.css" />
   <link
     href="/admin/config.yml"
     type="application/yaml"
@@ -13,21 +14,19 @@
   />
 
   <!--
-    Sveltia CMS — drop-in successor to Decap CMS.
+    Decap CMS with Netlify Identity for Git Gateway authentication.
 
-    The script tag below MUST NOT have type="module". Sveltia is
-    distributed as a classic script and auto-mounts into the body.
-    Adding type="module" makes the bundle load but never mount,
-    which produces a blank page. This is documented in the
-    Sveltia "Common Mistakes" section of the Start guide.
+    This provides simple email/password login for non-technical users
+    instead of requiring GitHub Personal Access Tokens. Netlify Identity
+    handles user management and Git Gateway acts as a proxy to GitHub.
 
-    The body must be effectively empty so Sveltia can render. Any
-    pre-mount UI here would be wiped on mount.
+    The CMS mounts automatically after the scripts load. Any pre-mount
+    UI would be wiped on mount, so the body stays empty.
   -->
   <script>
     // Surface any uncaught error or unhandled promise rejection on
     // the page as a visible diagnostic. Helps turn a blank page into
-    // a useful error message when Sveltia fails to initialise.
+    // a useful error message when Decap CMS fails to initialise.
     function showAdminError(title, details) {
       var d = document.createElement('div');
       d.style.cssText = 'max-width:48rem;margin:2rem auto;padding:1.5rem;background:#fff;border-left:4px solid #dc2626;border-radius:8px;font:14px/1.5 -apple-system,BlinkMacSystemFont,sans-serif;';
@@ -54,7 +53,25 @@
       );
     });
   </script>
-  <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
+
+  <!-- Netlify Identity Widget for authentication -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+  <!-- Decap CMS -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+  <!-- Handle Identity login redirects -->
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", function(user) {
+        if (!user) {
+          window.netlifyIdentity.on("login", function() {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
 </head>
 <body>
   <!-- Intentionally empty. Sveltia mounts its UI here on load. -->
